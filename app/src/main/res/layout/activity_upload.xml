@@ -4,66 +4,132 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Upload">
+    tools:context=".Upload"
+    android:background="#ffffff">
 
-    <Button
-        android:id="@+id/uploadintent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="147dp"
-        android:layout_marginTop="53dp"
-        android:layout_marginEnd="149dp"
-        android:layout_marginBottom="410dp"
-        android:text="Select File"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="136dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="7dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="314dp"
+        android:layout_marginBottom="2dp"
+        android:text="Subject Name:"
+        android:textAlignment="center"
+        android:textColor="@color/colorAccent"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/spinner3"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.032"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:onClick="onclickselectfile"/>
+        app:layout_constraintTop_toBottomOf="@+id/textdisplay" />
 
     <TextView
         android:id="@+id/textdisplay"
-        android:layout_width="180dp"
-        android:layout_height="46dp"
-        android:layout_marginStart="111dp"
-        android:layout_marginTop="80dp"
-        android:layout_marginEnd="93dp"
-        android:layout_marginBottom="284dp"
+        android:layout_width="351dp"
+        android:layout_height="105dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="7dp"
+        android:background="@drawable/textview_border"
+        android:gravity="center"
         android:text="No File Selected"
         android:textAlignment="center"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textColor="@color/colorAccent"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/textView12"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.125"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/uploadintent" />
+        app:layout_constraintTop_toBottomOf="@+id/textView11" />
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="0.2dp"
+        android:id="@+id/separator"
+        android:visibility="visible"
+        android:background="@android:color/background_dark"/>
 
-    <Button
+    <ImageButton
         android:id="@+id/uploadbutton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="103dp"
+        android:layout_height="102dp"
         android:layout_marginStart="160dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="136dp"
-        android:layout_marginBottom="68dp"
+        android:layout_marginBottom="16dp"
+        android:background="#ffffff"
         android:onClick="onclickUpload"
+        android:scaleType="fitXY"
+        android:src="@drawable/uploadbutton"
         android:text="Upload"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.992" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <Spinner
         android:id="@+id/spinner3"
-        android:layout_width="367dp"
-        android:layout_height="45dp"
+        android:layout_width="340dp"
+        android:layout_height="49dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="71dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="70dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/textview_border"
         app:layout_constraintBottom_toTopOf="@+id/uploadbutton"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.3"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textdisplay" />
+        app:layout_constraintTop_toBottomOf="@+id/textView12" />
+
+    <ImageButton
+        android:id="@+id/imageButton3"
+        android:layout_width="398dp"
+        android:layout_height="161dp"
+        android:layout_marginBottom="1dp"
+        android:background="#ffffff"
+        android:onClick="onclickselectfile"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toTopOf="@+id/textView11"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/clickhere" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="391dp"
+        android:layout_height="37dp"
+        android:gravity="center"
+        android:text="       CLICK HERE TO UPLOAD"
+        android:textAlignment="center"
+        android:textColor="@color/buttonTextColor"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/imageButton3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="105dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="7dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="314dp"
+        android:text="FileName:"
+        android:textAlignment="center"
+        android:textColor="@color/colorAccent"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/textdisplay"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.071"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageButton3" />
 </android.support.constraint.ConstraintLayout>

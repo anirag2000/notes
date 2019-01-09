@@ -24,6 +24,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.List;
 
 public class recycleradapter_file extends RecyclerView.Adapter<recycleradapter_file.MyViewHolder> {
+    String filename;
     String foldername;
 
     private Context mContext ;
@@ -55,6 +56,9 @@ public class recycleradapter_file extends RecyclerView.Adapter<recycleradapter_f
     public recycleradapter_file(Context mContext, List<subject_mc> mData) {
         this.mContext = mContext;
         this.mData = mData;
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(mContext);
+        foldername = sharedPref.getString("sname", "Not Available");
+
     }
 
     @Override
@@ -137,7 +141,7 @@ else
             public boolean onLongClick(View v) {
 
                 showPopupMenu(holder.cardView);
-                foldername=mData.get(position).getSubject();
+                filename=mData.get(position).getSubject();
 
 
 
@@ -153,7 +157,7 @@ else
         // inflate menu
         PopupMenu popup = new PopupMenu(mContext, view);
         MenuInflater inflater = popup.getMenuInflater();
-        inflater.inflate(R.menu.folder_menu, popup.getMenu());
+        inflater.inflate(R.menu.file_menu, popup.getMenu());
         popup.setOnMenuItemClickListener(new MyMenuItemClickListener());
         popup.show();
     }
@@ -169,15 +173,14 @@ else
         @Override
         public boolean onMenuItemClick(MenuItem menuItem) {
             switch (menuItem.getItemId()) {
-                case R.id.rename:
-                    Toast.makeText(mContext, foldername, Toast.LENGTH_SHORT).show();
-                    return true;
+
                 case R.id.delete:
                     SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(mContext);
                     String userName = sharedPref.getString("userName", "Not Available");
-                    DatabaseReference db=FirebaseDatabase.getInstance().getReference("Subjects");
+                    DatabaseReference db=FirebaseDatabase.getInstance().getReference("files");
 
-                    db.child(userName).child(foldername).removeValue();
+                    db.child(userName).child(foldername).child(filename.substring(0, filename.indexOf("."))).removeValue();
+                    Log.w("Warning",userName+foldername+filename.substring(0, filename.indexOf(".")));
                     Intent i1=new Intent(mContext,nav.class);
                     mContext.startActivity(i1);
 

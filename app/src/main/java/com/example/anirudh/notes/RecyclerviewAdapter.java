@@ -4,9 +4,12 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Handler;
 import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -17,8 +20,15 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.HashMap;
 import java.util.List;
@@ -59,6 +69,16 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
         this.mData = mData;
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(mContext);
         userName = sharedPref.getString("userName", "Not Available");
+
+        //now get Editor
+        SharedPreferences.Editor editor = sharedPref.edit();
+        //put your value
+        editor.putString("foldername",foldername);
+
+
+        //commits your edits
+        editor.commit();
+
     }
 
     @Override
@@ -81,13 +101,17 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
             @Override
             public void onClick(View v) {
 
+
+
+                SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(mContext);
+
                 Intent intent = new Intent(mContext,Noteslist.class);
 
                 // passing data to the book activity
                 intent.putExtra("finalcomb",userName);
 
                 intent.putExtra("Title",mData.get(position).getSubject());
-                SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(mContext);
+                SharedPreferences sharedPref1 = PreferenceManager.getDefaultSharedPreferences(mContext);
                 //now get Editor
                 SharedPreferences.Editor editor = sharedPref.edit();
                 //put your value
@@ -148,13 +172,84 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
         public boolean onMenuItemClick(MenuItem menuItem) {
             switch (menuItem.getItemId()) {
                 case R.id.rename:
-                    Toast.makeText(mContext, foldername, Toast.LENGTH_SHORT).show();
+                    DatabaseReference db=FirebaseDatabase.getInstance().getReference("Subjects");
+
+                    db.child(userName).child(foldername).removeValue();
+                    db.child(userName).child("chumma").setValue(new subject_mc("chumma"));
+                    FirebaseDatabase.getInstance().getReference("files").child(userName).child(foldername)
+                            .addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                    FirebaseDatabase.getInstance().getReference("files").child(userName).child("chumma").setValue(dataSnapshot.getValue());
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                }
+                            });
+                    FirebaseDatabase.getInstance().getReference("Subject").child(userName).child(foldername)
+                            .addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                    FirebaseDatabase.getInstance().getReference("Subject").child(userName).child("chumma").setValue(dataSnapshot.getValue());
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                }
+                            });
+
+                    Log.w("Warning",foldername);
+
+                    new Handler().postDelayed(new Runnable() {
+                        public void run() {
+                            DatabaseReference db21=FirebaseDatabase.getInstance().getReference("Subject");
+
+                            db21.child(userName).child(foldername).removeValue();
+                            DatabaseReference db14=FirebaseDatabase.getInstance().getReference("files");
+
+                            db14.child(userName).child(foldername).removeValue();
+
+
+
+                        }
+                    }, 2000);
+
+
+
+
+
+
+
+
+
+
                     return true;
                 case R.id.delete:
 
-                    DatabaseReference db=FirebaseDatabase.getInstance().getReference("Subjects");
+                    DatabaseReference db12=FirebaseDatabase.getInstance().getReference("files");
 
-                   db.child(userName).child(foldername).removeValue();
+                    db12.child(userName).child(foldername).removeValue();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    DatabaseReference db2=FirebaseDatabase.getInstance().getReference("Subjects");
+
+                   db2.child(userName).child(foldername).removeValue();
                     Intent i1=new Intent(mContext,nav.class);
                     mContext.startActivity(i1);
 

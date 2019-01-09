@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -30,11 +31,22 @@ public class addsub extends AppCompatActivity {
     {
         EditText ed=(EditText)findViewById(R.id.editText);
         String sub=ed.getText().toString();
-        subject_mc subjectMc=new subject_mc(sub);
-        db.child(finalcomb).child(sub).setValue(subjectMc);
-        Intent intent=new Intent();
-        setResult(Activity.RESULT_OK,intent);
-        finish();
+        try
+        {
+            subject_mc subjectMc = new subject_mc(sub);
+            db.child(finalcomb).child(sub).setValue(subjectMc);
+            Intent intent = new Intent();
+            setResult(Activity.RESULT_OK, intent);
+            finish();
+
+            }
+            catch (Exception e
+        )
+            {
+                Toast.makeText(addsub.this,e.getMessage().toString(),Toast.LENGTH_LONG).show();
+            }
+
+
 
 
 

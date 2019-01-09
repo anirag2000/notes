@@ -147,14 +147,9 @@ String sname;
 
 
 
-        Intent intent = new Intent();
-
-        intent.setType("image/*|application/pdf|application/zip|application/msword\",\"application/vnd.openxmlformats-officedocument.wordprocessingml.document\", // .doc & .docx\n" +
-                "                        \"application|application/vnd.ms-powerpoint|application/vnd.openxmlformats-officedocument.presentationml.presentation|application/vnd.openxmlformats-officedocument.wordprocessingml.document|text/plain");
-
-intent.setAction(Intent.ACTION_GET_CONTENT);
-
-startActivityForResult(intent,86);
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.setType("file/*");
+        startActivityForResult(intent, 86);
 
 
     }
@@ -194,85 +189,83 @@ startActivityForResult(intent,86);
     }
 
     private void uploadPdf(Uri docUri) {
-        progressDialog=new ProgressDialog(Upload.this);
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-        progressDialog.setTitle("Uploadingggg.... xD");
-        progressDialog.setProgress(0);
-        progressDialog.show();
+        try {
+            progressDialog = new ProgressDialog(Upload.this);
+            progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+            progressDialog.setTitle("Uploadingggg.... xD");
+            progressDialog.setProgress(0);
+            progressDialog.show();
 
-        final StorageReference reference=firebaseStorage.getReference();
-        reference.child("Notes").child(finalcomb).child(sname).child(filename).putFile(docUri)
-                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        StorageReference storageRef = firebaseStorage.getReference();
+            final StorageReference reference = firebaseStorage.getReference();
+            reference.child("Notes").child(finalcomb).child(sname).child(filename).putFile(docUri)
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            StorageReference storageRef = firebaseStorage.getReference();
 
 // Create a reference with an initial file path and name
 
-                        Log.w("url","Notes/"+finalcomb+"/"+sname+"/"+filename);
-                        storageRef.child("Notes/"+finalcomb+"/"+sname+"/"+filename).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                            @Override
-                            public void onSuccess(Uri uri) {
-                                Log.w("url",uri.toString());
-                                DatabaseReference databaseReference=firebaseDatabase.getReference();
-                                databaseReference.child("Subject").child(finalcomb).child(sname).child(filename.substring(0,filename.indexOf("."))).setValue(new url_mc(uri.toString()))
-                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                            @Override
-                                            public void onSuccess(Void aVoid) {
-                                                Toast.makeText(Upload.this,"Uploaded Successfully",Toast.LENGTH_LONG).show();
-                                                progressDialog.hide();
-                                                Intent intent=new Intent(Upload.this,nav.class);
-                                                finish();
-                                                overridePendingTransition(R.xml.slide_in_left, R.xml.slide_out_right);
-                                            }
-                                        })
-                                        .addOnFailureListener(new OnFailureListener() {
-                                            @Override
-                                            public void onFailure(@NonNull Exception e) {
-                                                Toast.makeText(Upload.this,"Upload Failed",Toast.LENGTH_LONG).show();
-                                            }
-                                        });
-                                databaseReference.child("files").child(finalcomb).child(sname).child(filename.substring(0,filename.indexOf("."))).setValue(new subject_mc(filename));
+                            Log.w("url", "Notes/" + finalcomb + "/" + sname + "/" + filename);
+                            storageRef.child("Notes/" + finalcomb + "/" + sname + "/" + filename).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    Log.w("url", uri.toString());
+                                    DatabaseReference databaseReference = firebaseDatabase.getReference();
+                                    databaseReference.child("Subject").child(finalcomb).child(sname).child(filename.substring(0, filename.indexOf("."))).setValue(new url_mc(uri.toString()))
+                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                @Override
+                                                public void onSuccess(Void aVoid) {
+                                                    Toast.makeText(Upload.this, "Uploaded Successfully", Toast.LENGTH_LONG).show();
+                                                    progressDialog.hide();
+                                                    Intent intent = new Intent(Upload.this, nav.class);
+                                                    finish();
+                                                    overridePendingTransition(R.xml.slide_in_left, R.xml.slide_out_right);
+                                                }
+                                            })
+                                            .addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+                                                    Toast.makeText(Upload.this, "Upload Failed", Toast.LENGTH_LONG).show();
+                                                }
+                                            });
+                                    databaseReference.child("files").child(finalcomb).child(sname).child(filename.substring(0, filename.indexOf("."))).setValue(new subject_mc(filename));
 
-                            }
+                                }
 
-                        })
-                                .addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        Toast.makeText(Upload.this,"failure",Toast.LENGTH_LONG).show();
+                            })
+                                    .addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Toast.makeText(Upload.this, "failure", Toast.LENGTH_LONG).show();
 
-                                    }
-                                });
-
-
+                                        }
+                                    });
 
 
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(Upload.this, "Upload Failed", Toast.LENGTH_LONG).show();
 
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(Upload.this,"Upload Failed",Toast.LENGTH_LONG).show();
-
-            }
-        }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                progressDialog.setProgress((int)(100*taskSnapshot.getBytesTransferred()/taskSnapshot.getTotalByteCount()));
-
+                }
+            }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                    progressDialog.setProgress((int) (100 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount()));
 
 
+                }
+            });
 
 
-
-            }
-        });
-
-
-
-
+        }
+        catch (Exception e)
+        {
+            Toast.makeText(Upload.this,e.getMessage().toString(),Toast.LENGTH_LONG).show();
+        }
     }
+
     public void finish() {
         super.finish();
         overridePendingTransition(R.xml.slide_in_left, R.xml.slide_out_right);
