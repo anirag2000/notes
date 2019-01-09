@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".addsub"
+    android:background="#ffffff">
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="112dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="ADD"
+        android:textAlignment="textStart"
+        android:textColor="@color/colorPrimary"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.285" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
+        android:layout_marginEnd="49dp"
+        android:layout_marginBottom="325dp"
+        android:text="SUBJECT"
+        android:textColor="@color/colorAccent"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/textView6"
+        app:layout_constraintTop_toBottomOf="@+id/imageView6"
+        app:layout_constraintVertical_bias="0.4" />
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="102dp"
+        android:layout_height="74dp"
+        android:layout_marginStart="124dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.113"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/add" />
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="351dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="68dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="200dp"
+        android:ems="10"
+        android:hint="Enter the name of the subject"
+        android:inputType="text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+    <ImageButton
+        android:id="@+id/imageButton2"
+        android:layout_width="67dp"
+        android:layout_height="62dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="88dp"
+        android:background="#00000000"
+        android:onClick="onclicksu"
+        android:scaleType="fitXY"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/code"
+        app:layout_constraintVertical_bias="0.532"
+        app:srcCompat="@drawable/next"
+        />
+
+</android.support.constraint.ConstraintLayout>

@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">PESU Notes</string>
+    <string name="my_text">I AM MATURE ENOUGH TO TYPE IT MANUALLY<u>underline</u>.</string>
+    <string-array name="semester">
+        <item>Physics Cycle</item>
+        <item>Chemistry Cycle</item>
+
+        <item>3rd Semester</item>
+        <item>4th Semester</item>
+        <item>5th Semester</item>
+        <item>6th Semester</item>
+        <item>7th Semester</item>
+        <item>8th Semester</item>
+
+    </string-array>
+    <string-array name="subject">
+        <item>Computer Science </item>
+        <item>Electronics And Communication</item>
+        <item>Mechanical</item>
+
+
+    </string-array>
+    <string name="title_activity_nav">nav</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+</resources>

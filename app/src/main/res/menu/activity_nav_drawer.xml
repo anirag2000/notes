@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/edit_details"
+            android:icon="@drawable/edit"
+            android:title="Edit User Details" />
+        <item
+            android:id="@+id/upload"
+            android:icon="@drawable/uploadclick"
+            android:title="Upload Notes" />
+        <item
+            android:id="@+id/addsub"
+            android:icon="@drawable/addicon"
+            android:title="Add Subjects" />
+        <item
+            android:id="@+id/nav_manage"
+            android:icon="@drawable/refresh"
+            android:title="Refresh" />
+        <item
+            android:id="@+id/signout"
+            android:icon="@drawable/signout"
+            android:title="Sign Out" />
+    </group>
+
+
+
+</menu>
