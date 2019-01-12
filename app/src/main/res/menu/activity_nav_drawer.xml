@@ -23,7 +23,8 @@
         <item
             android:id="@+id/signout"
             android:icon="@drawable/signout"
-            android:title="Sign Out" />
+            android:title="Sign Out"
+            />
     </group>
 
 

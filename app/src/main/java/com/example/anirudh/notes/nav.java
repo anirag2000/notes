@@ -263,7 +263,10 @@ public class nav extends AppCompatActivity
                 final ProgressDialog progressDialog=new ProgressDialog(this);
                 progressDialog.show();
                 final Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
+                handler.postDelayed(
+
+
+                        new Runnable() {
                     @Override
                     public void run() {
 
@@ -293,7 +296,8 @@ public class nav extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.mybutton) {
+            this.recreate();
             return true;
         }
 

@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.client.DataSnapshot;
@@ -72,14 +73,26 @@ public class Noteslist extends AppCompatActivity {
         myfirebase.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot dsp : dataSnapshot.getChildren()) {
-                    filenames.add(new subject_mc(
-                            dsp.child("subject").getValue(String.class)));
-                    //Toast.makeText(nav.this,dsp.child("subject").getValue(String.class),Toast.LENGTH_LONG).show();
+                try {
+                    for (DataSnapshot dsp : dataSnapshot.getChildren()) {
+                        filenames.add(new subject_mc(
+                                dsp.child("subject").getValue(String.class)));
+                        //Toast.makeText(nav.this,dsp.child("subject").getValue(String.class),Toast.LENGTH_LONG).show();
 
+                    }
+                    int no = filenames.size();
+                    if (no == 0) {
+                        TextView gonetext = (TextView) findViewById(R.id.gonetext);
+                        gonetext.setText("The folder is empty. Please Upload Files");
+                    }
+
+                    myrv.setAdapter(myAdapter);
+                }
+                catch (Exception e)
+                {
+                    Toast.makeText(Noteslist.this,e.getMessage(),Toast.LENGTH_LONG).show();
                 }
 
-                myrv.setAdapter(myAdapter);
 
 
 

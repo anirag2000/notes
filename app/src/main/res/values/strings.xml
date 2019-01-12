@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">PESU Notes</string>
+    <string name="app_name">Notes</string>
     <string name="my_text">I AM MATURE ENOUGH TO TYPE IT MANUALLY<u>underline</u>.</string>
     <string-array name="semester">
         <item>Physics Cycle</item>

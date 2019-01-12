@@ -78,12 +78,12 @@ public class recycleradapter_file extends RecyclerView.Adapter<recycleradapter_f
 
         String type= (mData.get(position).getSubject()).substring(mData.get(position).getSubject().indexOf("."),mData.get(position).getSubject().length());
 
-if(mData.get(position).getSubject().length()<13) {
-    holder.tv_book_title.setText(mData.get(position).getSubject());
+if(mData.get(position).getSubject().length()<42) {
+    holder.tv_book_title.setText(mData.get(position).getSubject().substring(0,mData.get(position).getSubject().indexOf(".")));
 }
 else
 {
-    holder.tv_book_title.setText((mData.get(position).getSubject()).substring(0,5)+"..."+type);
+    holder.tv_book_title.setText((mData.get(position).getSubject()).substring(0,38)+"...");
 
 }
         if(type.equals(".pdf"))

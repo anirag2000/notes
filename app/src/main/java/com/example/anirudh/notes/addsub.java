@@ -31,20 +31,23 @@ public class addsub extends AppCompatActivity {
     {
         EditText ed=(EditText)findViewById(R.id.editText);
         String sub=ed.getText().toString();
-        try
-        {
-            subject_mc subjectMc = new subject_mc(sub);
-            db.child(finalcomb).child(sub).setValue(subjectMc);
-            Intent intent = new Intent();
-            setResult(Activity.RESULT_OK, intent);
-            finish();
+        if(sub.length()<15) {
+            try {
+                subject_mc subjectMc = new subject_mc(sub);
+                db.child(finalcomb).child(sub).setValue(subjectMc);
+                Intent intent = new Intent();
+                setResult(Activity.RESULT_OK, intent);
+                finish();
 
+            } catch (Exception e
+                    ) {
+                Toast.makeText(addsub.this, e.getMessage().toString(), Toast.LENGTH_LONG).show();
             }
-            catch (Exception e
-        )
-            {
-                Toast.makeText(addsub.this,e.getMessage().toString(),Toast.LENGTH_LONG).show();
-            }
+        }
+        else
+        {
+            Toast.makeText(addsub.this,"Enter a name within 15 characters",Toast.LENGTH_LONG).show();
+        }
 
 
 

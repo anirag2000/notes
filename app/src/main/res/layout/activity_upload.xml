@@ -1,38 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Upload"
-    android:background="#ffffff">
+    android:background="#ffffff"
+    android:orientation="vertical">
+
+    <ImageButton
+        android:id="@+id/imageButton3"
+        android:layout_width="match_parent"
+        android:layout_height="161dp"
+        android:layout_marginBottom="1dp"
+        android:background="@color/common_google_signin_btn_text_dark_focused"
+        android:onClick="onclickselectfile"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toTopOf="@+id/textView11"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/clickhere" />
 
     <TextView
-        android:id="@+id/textView12"
-        android:layout_width="136dp"
+        android:id="@+id/textView11"
+        android:layout_width="182dp"
         android:layout_height="25dp"
         android:layout_marginStart="7dp"
-        android:layout_marginTop="7dp"
+        android:layout_marginTop="1dp"
         android:layout_marginEnd="314dp"
-        android:layout_marginBottom="2dp"
-        android:text="Subject Name:"
-        android:textAlignment="center"
+        android:text="  FileName:"
         android:textColor="@color/colorAccent"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/spinner3"
+        app:layout_constraintBottom_toTopOf="@+id/textdisplay"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.032"
+        app:layout_constraintHorizontal_bias="0.071"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textdisplay" />
+        app:layout_constraintTop_toBottomOf="@+id/imageButton3" />
 
     <TextView
         android:id="@+id/textdisplay"
-        android:layout_width="351dp"
-        android:layout_height="105dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="2dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginBottom="7dp"
+        android:layout_width="match_parent"
+        android:layout_height="108dp"
+
         android:background="@drawable/textview_border"
         android:gravity="center"
         android:text="No File Selected"
@@ -44,12 +55,36 @@
         app:layout_constraintHorizontal_bias="0.125"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView11" />
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="0.2dp"
-        android:id="@+id/separator"
-        android:visibility="visible"
-        android:background="@android:color/background_dark"/>
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="184dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="7dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="314dp"
+        android:layout_marginBottom="2dp"
+        android:text="  Subject Name:"
+        android:textAlignment="textStart"
+        android:textColor="@color/colorAccent"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/spinner3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.032"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textdisplay" />
+
+    <Spinner
+        android:id="@+id/spinner3"
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+
+        android:background="@drawable/textview_border"
+        app:layout_constraintBottom_toTopOf="@+id/uploadbutton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
     <ImageButton
         android:id="@+id/uploadbutton"
@@ -71,65 +106,21 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
 
-    <Spinner
-        android:id="@+id/spinner3"
-        android:layout_width="340dp"
-        android:layout_height="49dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="2dp"
-        android:layout_marginBottom="20dp"
-        android:background="@drawable/textview_border"
-        app:layout_constraintBottom_toTopOf="@+id/uploadbutton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.3"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView12" />
-
-    <ImageButton
-        android:id="@+id/imageButton3"
-        android:layout_width="398dp"
-        android:layout_height="161dp"
-        android:layout_marginBottom="1dp"
-        android:background="#ffffff"
-        android:onClick="onclickselectfile"
-        android:scaleType="fitXY"
-        app:layout_constraintBottom_toTopOf="@+id/textView11"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/clickhere" />
-
     <TextView
         android:id="@+id/textView10"
-        android:layout_width="391dp"
+        android:layout_width="match_parent"
         android:layout_height="37dp"
         android:gravity="center"
-        android:text="       CLICK HERE TO UPLOAD"
+        android:text="👇CLICK HERE TO UPLOAD👇"
         android:textAlignment="center"
-        android:textColor="@color/buttonTextColor"
+        android:textColor="@color/com_facebook_button_login_silver_background_color"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/imageButton3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.857"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
-    <TextView
-        android:id="@+id/textView11"
-        android:layout_width="105dp"
-        android:layout_height="25dp"
-        android:layout_marginStart="7dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="314dp"
-        android:text="FileName:"
-        android:textAlignment="center"
-        android:textColor="@color/colorAccent"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/textdisplay"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.071"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton3" />
 </android.support.constraint.ConstraintLayout>

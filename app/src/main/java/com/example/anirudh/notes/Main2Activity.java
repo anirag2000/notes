@@ -103,6 +103,15 @@ public class Main2Activity extends AppCompatActivity {
         EditText ed1=(EditText)findViewById(R.id.code);
         String code=ed1.getText().toString();
         check(code);
+        TextView tv1=(TextView)findViewById(R.id.textView2);
+
+        EditText ed2=(EditText)findViewById(R.id.code);
+        ImageButton button=(ImageButton)findViewById(R.id.button);
+        ProgressBar pb=(ProgressBar)findViewById(R.id.progressBar);
+        pb.setVisibility(View.VISIBLE);
+        tv1.setVisibility(View.INVISIBLE);
+        ed1.setVisibility(View.INVISIBLE);
+        button.setVisibility(View.INVISIBLE);
 
 
 

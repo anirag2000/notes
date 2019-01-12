@@ -2,11 +2,13 @@ package com.example.anirudh.notes;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -15,6 +17,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
@@ -38,6 +41,7 @@ import java.util.Map;
 public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapter.MyViewHolder> {
     String foldername;
     String userName;
+    String user;
 
     private Context mContext ;
     private List<subject_mc> mData ;
@@ -86,6 +90,7 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
 
         View view ;
         LayoutInflater mInflater = LayoutInflater.from(mContext);
+
         view = mInflater.inflate(R.layout.cardview_folder,parent,false);
         return new MyViewHolder(view);
 
@@ -169,53 +174,118 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
         }
 
         @Override
-        public boolean onMenuItemClick(MenuItem menuItem) {
+        public boolean onMenuItemClick(final MenuItem menuItem) {
             switch (menuItem.getItemId()) {
                 case R.id.rename:
-                    DatabaseReference db=FirebaseDatabase.getInstance().getReference("Subjects");
+                    LayoutInflater inflater = LayoutInflater.from(mContext);
 
-                    db.child(userName).child(foldername).removeValue();
-                    db.child(userName).child("chumma").setValue(new subject_mc("chumma"));
-                    FirebaseDatabase.getInstance().getReference("files").child(userName).child(foldername)
-                            .addListenerForSingleValueEvent(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                    FirebaseDatabase.getInstance().getReference("files").child(userName).child("chumma").setValue(dataSnapshot.getValue());
+                    View alertLayout = inflater.inflate(R.layout.layout_custom_dialog, null);
+                    final EditText etUsername = alertLayout.findViewById(R.id.et_username);
+                    AlertDialog.Builder alert = new AlertDialog.Builder(mContext);
+
+                    alert.setTitle("Enter a name to Rename the folder");
+                    // this is set the view from XML inside AlertDialog
+                    alert.setView(alertLayout);
+                    // disallow cancel of AlertDialog on click of back button and outside touch
+                    alert.setCancelable(false);
+                    alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Toast.makeText(mContext, "Cancel clicked", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+                    alert.setPositiveButton("Done", new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                           user = etUsername.getText().toString();
+                            DatabaseReference db=FirebaseDatabase.getInstance().getReference("Subjects");
+
+                            db.child(userName).child(foldername).removeValue();
+                            db.child(userName).child(user).setValue(new subject_mc(user));
+                            FirebaseDatabase.getInstance().getReference("files").child(userName).child(foldername)
+                                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                            FirebaseDatabase.getInstance().getReference("files").child(userName).child(user).setValue(dataSnapshot.getValue());
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                        }
+                                    });
+                            FirebaseDatabase.getInstance().getReference("Subject").child(userName).child(foldername)
+                                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                            FirebaseDatabase.getInstance().getReference("Subject").child(userName).child(user).setValue(dataSnapshot.getValue());
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                        }
+                                    });
+
+                            Log.w("Warning",foldername);
+
+                            new Handler().postDelayed(new Runnable() {
+                                public void run() {
+                                    DatabaseReference db21=FirebaseDatabase.getInstance().getReference("Subject");
+
+                                    db21.child(userName).child(foldername).removeValue();
+                                    DatabaseReference db14=FirebaseDatabase.getInstance().getReference("files");
+
+                                    db14.child(userName).child(foldername).removeValue();
+
+
+
                                 }
+                            }, 3000);
 
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                                }
-                            });
-                    FirebaseDatabase.getInstance().getReference("Subject").child(userName).child(foldername)
-                            .addListenerForSingleValueEvent(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                    FirebaseDatabase.getInstance().getReference("Subject").child(userName).child("chumma").setValue(dataSnapshot.getValue());
-                                }
 
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                                }
-                            });
-
-                    Log.w("Warning",foldername);
-
-                    new Handler().postDelayed(new Runnable() {
-                        public void run() {
-                            DatabaseReference db21=FirebaseDatabase.getInstance().getReference("Subject");
-
-                            db21.child(userName).child(foldername).removeValue();
-                            DatabaseReference db14=FirebaseDatabase.getInstance().getReference("files");
-
-                            db14.child(userName).child(foldername).removeValue();
 
 
 
                         }
-                    }, 2000);
+                    });
+                    AlertDialog dialog = alert.create();
+                    dialog.show();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -248,10 +318,12 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
 
 
                     DatabaseReference db2=FirebaseDatabase.getInstance().getReference("Subjects");
+                    db2.child(userName).child(foldername).removeValue();
 
-                   db2.child(userName).child(foldername).removeValue();
-                    Intent i1=new Intent(mContext,nav.class);
-                    mContext.startActivity(i1);
+
+                    Toast.makeText(mContext,"PLEASE REFRESH....",Toast.LENGTH_LONG).show();
+
+
 
 
 
