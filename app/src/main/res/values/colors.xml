@@ -3,4 +3,7 @@
     <color name="colorPrimary">#800000</color>
     <color name="colorPrimaryDark">#800000</color>
     <color name="colorAccent">#800000</color>
+    <color name="white">#ffffff</color>
+    <color name="textColorPrimary">#ffffff</color>
+    <color name="textColorSecondary">@color/white</color>
 </resources>

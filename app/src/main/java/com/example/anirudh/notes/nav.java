@@ -118,7 +118,7 @@ public class nav extends AppCompatActivity
         String url="https://notes-d46cc.firebaseio.com/new/"+uid;
 
         myfirebase = new Firebase(url);
-        myfirebase.addValueEventListener(new ValueEventListener() {
+        myfirebase.addListenerForSingleValueEvent((new com.firebase.client.ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -186,7 +186,7 @@ public class nav extends AppCompatActivity
                        // Toast.makeText(nav.this,url1,Toast.LENGTH_LONG).show();
 
                         myfirebase = new Firebase(url1);
-                        myfirebase.addListenerForSingleValueEvent(new ValueEventListener() {
+                        myfirebase.addListenerForSingleValueEvent((new com.firebase.client.ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
                                 for (DataSnapshot dsp : dataSnapshot.getChildren()) {
@@ -212,7 +212,7 @@ public class nav extends AppCompatActivity
 
 
                             }
-                        });
+                        }));
 
 
 
@@ -248,7 +248,7 @@ public class nav extends AppCompatActivity
             public void onCancelled(FirebaseError firebaseError) {
 
             }
-        });
+        }));
 
 
 
@@ -272,7 +272,7 @@ public class nav extends AppCompatActivity
 
                         progressDialog.hide();
                     }
-                }, 2000);
+                }, 1000);
                 this.recreate();
             }
 
@@ -330,7 +330,16 @@ public class nav extends AppCompatActivity
             overridePendingTransition(R.xml.slide_in_right, R.xml.slide_out_left);
 
 
-        } else if (id == R.id.nav_manage) {
+        }
+        else if (id == R.id.notes) {
+            Intent intent=new Intent(nav.this,memonotes.class);
+
+
+            startActivityForResult(intent,1);
+            overridePendingTransition(R.xml.slide_in_right, R.xml.slide_out_left);
+
+
+        }else if (id == R.id.nav_manage) {
             finish();
             startActivity(getIntent());
 

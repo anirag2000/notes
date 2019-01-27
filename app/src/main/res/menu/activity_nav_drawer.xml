@@ -9,6 +9,10 @@
             android:icon="@drawable/edit"
             android:title="Edit User Details" />
         <item
+            android:id="@+id/notes"
+            android:icon="@drawable/notes1"
+            android:title="NotePad" />
+        <item
             android:id="@+id/upload"
             android:icon="@drawable/uploadclick"
             android:title="Upload Notes" />

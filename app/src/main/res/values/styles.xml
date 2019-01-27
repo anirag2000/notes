@@ -21,5 +21,18 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="AppSearchView" parent="Widget.AppCompat.SearchView" >
+        <!-- Text Size -->
 
+        <!-- Query Text Color -->
+        <item name="android:textColorPrimary">@color/textColorPrimary</item>
+        <!-- Hint Color -->
+        <item name="android:textColorHint">@color/textColorPrimary</item>
+        <item name="android:colorPrimary">@color/textColorPrimary</item>
+        <!-- Hint Color -->
+        <item name="android:colorAccent">@color/textColorPrimary</item>
+        <item name="android:colorPrimaryDark">@color/textColorPrimary</item>
+        <!-- Icon Color -->
+        <item name="android:tint">@color/textColorPrimary</item>
+    </style>
 </resources>

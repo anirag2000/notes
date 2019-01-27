@@ -5,12 +5,15 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
+import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.CursorLoader;
@@ -38,6 +41,8 @@ import com.google.android.gms.common.util.NumberUtils;
 import com.google.android.gms.flags.impl.DataUtils;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -64,6 +69,8 @@ public class Upload extends AppCompatActivity {
     String user;
 String sname;
 String file;
+String uid;
+String admin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -258,14 +265,68 @@ String file;
     public void onclickUpload(View view)
 
     {
-        if(DocUri!=null)
-        {
-            uploadPdf(DocUri);
-        }
-        else
-        {
-            Toast.makeText(Upload.this,"No FILE SELECTED",Toast.LENGTH_LONG).show();
-        }
+
+        ///here////
+        FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
+        uid=currentFirebaseUser.getUid();
+
+
+
+        Firebase.setAndroidContext(getApplicationContext());
+        String url="https://notes-d46cc.firebaseio.com/new/"+uid;
+
+        myfirebase = new Firebase(url);
+        myfirebase.addListenerForSingleValueEvent((new com.firebase.client.ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                admin= dataSnapshot.child("admin").getValue(String.class);
+                //Toast.makeText(Upload.this, admin, Toast.LENGTH_LONG).show();
+                try {
+
+
+
+                        if (admin!=null && admin.equalsIgnoreCase("yes")) {
+
+
+                            if (DocUri != null) {
+                                uploadPdf(DocUri);
+                            } else {
+                                Toast.makeText(Upload.this, "No FILE SELECTED", Toast.LENGTH_LONG).show();
+                            }
+                        } else {
+                            Toast.makeText(Upload.this, "You are not a moderator,Please Contact Administrator ", Toast.LENGTH_LONG).show();
+
+
+                        }
+
+                }
+                catch (Exception e)
+
+                {
+                    Toast.makeText(Upload.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                }
+
+
+                }
+
+
+
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+                admin="no";
+
+            }
+        }));
+
+
+
+
+
+
+
+
+        ////end here///
 
 
 

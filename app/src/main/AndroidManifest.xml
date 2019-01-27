@@ -34,14 +34,18 @@
             android:name=".nav"
             android:label="Subjects"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Upload"
-            android:parentActivityName="com.example.anirudh.notes.nav"/>
-        <activity android:name=".addsub"
-            android:parentActivityName="com.example.anirudh.notes.nav"/>
-        <activity android:name=".Noteslist"
-            android:parentActivityName="com.example.anirudh.notes.nav"
-           />
-        <activity android:name=".Downloadurl"></activity>
+        <activity
+            android:name=".Upload"
+            android:parentActivityName=".nav" />
+        <activity
+            android:name=".addsub"
+            android:parentActivityName=".nav" />
+        <activity
+            android:name=".Noteslist"
+            android:parentActivityName=".nav" />
+        <activity android:name=".Downloadurl" />
+        <activity android:name=".memonotes" />
+        <activity android:name=".addmemo"></activity>
     </application>
 
 </manifest>

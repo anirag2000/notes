@@ -66,7 +66,7 @@ String uid;
     }
 public void onclickfinal(View view)
 {
-    student_mc mc=new student_mc(name,sem,sub,srn);
+    student_mc mc=new student_mc(name,sem,sub,srn,"no");
     db.child(uid).setValue(mc);
 
     Intent mStartActivity = new Intent(Subject.this, nav.class);

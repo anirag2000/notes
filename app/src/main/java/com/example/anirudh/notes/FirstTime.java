@@ -3,6 +3,7 @@ package com.example.anirudh.notes;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -24,6 +25,7 @@ ImageButton img;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first_time);
 
+
         ImageView imgv=(ImageView)findViewById(R.id.imageView);
         TextView tv=(TextView)findViewById(R.id.textView3);
         TextView tv1=(TextView)findViewById(R.id.textView);
@@ -33,6 +35,7 @@ ImageButton img;
         if(c.equals("nav"))
 
         {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             imgv.setVisibility(View.INVISIBLE);
             tv.setVisibility(View.INVISIBLE);
             tv1.setVisibility(View.VISIBLE);
@@ -85,6 +88,19 @@ img.setVisibility(View.VISIBLE);
     public void finish() {
         super.finish();
         overridePendingTransition(R.xml.slide_in_left, R.xml.slide_out_right);
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+
+
+                finish();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
 }

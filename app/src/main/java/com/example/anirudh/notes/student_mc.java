@@ -5,11 +5,16 @@ public class student_mc {
     String sem;
     String sub;
     String srn;
-    public student_mc(String name, String sem, String sub, String srn) {
+    String admin;
+
+
+
+    public student_mc(String name, String sem, String sub, String srn,String admin) {
         this.name = name;
         this.sem = sem;
         this.sub = sub;
         this.srn = srn;
+        this.admin=admin;
     }
 
     public String getName() {
@@ -27,7 +32,9 @@ public class student_mc {
     public String getSrn() {
         return srn;
     }
-
+    public String getAdmin() {
+        return admin;
+    }
 
 
 }
